@@ -29,7 +29,7 @@ PREREQUISITES: Setup your machine and Installation tools:
 * OpenCv and OpenCV-Contrib source files – I show where to get this in a later section. I installed OpenCv-4.1.0
 * Anaconda3 – installed from www.anaconda.org. Download the latest release. During installation, Set as the default python environment you could also add to path; we will also add it to a PYTHONPATH environmental variable in a later section.
 
-[![Anaconda Image](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/Python%20path%20screen%202.JPG)]
+[![Anaconda Image](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/Anaconda.png)]
 
 * Python 3.6 – installed during anaconda install
 * Cmake 3.15.0 – This is needed to configure OpenCV and generate scripts that will be passed to Visual Studio during build and release.
