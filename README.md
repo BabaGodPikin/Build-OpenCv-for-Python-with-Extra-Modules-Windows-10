@@ -175,12 +175,12 @@ importerror: dll load failed: the specified module could not be found.
 
 
 ### Some Useful References: ###
-https://vcpkg.readthedocs.io/en/latest/examples/installing-and-using-packages/
-https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019
-https://stackoverflow.com/questions/38051220/when-build-opencv-could-not-find-the-file-cv2-so/39651947
-https://stackoverflow.com/questions/15790501/why-cv2-so-missing-after-opencv-installed
-https://answers.opencv.org/question/173247/how-to-build-opencv-with-freetype-and-harfbuzz/
-https://docs.opencv.org/4.1.0/d9/dfa/classcv_1_1freetype_1_1FreeType2.html#aba641f774c47a70eaeb76bf7aa865915
-https://github.com/opencv/opencv/issues/13202
-https://fireant.github.io/misc/2017/01/28/ttf-opencv.html
+* https://vcpkg.readthedocs.io/en/latest/examples/installing-and-using-packages/
+* https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019
+* https://stackoverflow.com/questions/38051220/when-build-opencv-could-not-find-the-file-cv2-so/39651947
+* https://stackoverflow.com/questions/15790501/why-cv2-so-missing-after-opencv-installed
+* https://answers.opencv.org/question/173247/how-to-build-opencv-with-freetype-and-harfbuzz/
+* https://docs.opencv.org/4.1.0/d9/dfa/classcv_1_1freetype_1_1FreeType2.html#aba641f774c47a70eaeb76bf7aa865915
+* https://github.com/opencv/opencv/issues/13202
+* https://fireant.github.io/misc/2017/01/28/ttf-opencv.html
 
