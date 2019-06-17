@@ -33,13 +33,12 @@ BUILDING OPENCV WITH FREETYPE AND HARFBUZZ ENABLED
 
 * Python 3.6 – installed during anaconda install
 * Cmake 3.15.0 – This is needed to configure OpenCV and generate scripts that will be passed to Visual Studio during build and release.
-       *Download the windows installer from https://cmake.org/download/ . Just double click the downloaded MSI installer and follow normal windows installation process.
+       * Download the windows installer from https://cmake.org/download/ . Just double click the downloaded MSI installer and follow normal windows installation process.
 * Vcpkg - This is needed to install Freeteype2 and harfbuzz
-       *Vcpkg does not need to be installed. To get it working, you’ll need to clone the vcpkg folder from Microsoft GitHub page (instructions below)
-
-       *If you don’t already have git for windows installed, you can get git here - https://git-scm.com/downloads.
-       *Open your git bash
-       *Enter the following commands:
+       * Vcpkg does not need to be installed. To get it working, you’ll need to clone the vcpkg folder from Microsoft GitHub page (instructions below)
+       * If you don’t already have git for windows installed, you can get git here - https://git-scm.com/downloads.
+       * Open your git bash
+       * Enter the following commands:
               1. git clone https://github.com/Microsoft/vcpkg.git
               2. The above command copies the needed files to your system. Mine copied to folder located at - C:\Users\<myusername>\vcpkg
               3. Use the cd command of git bash to navigate to the vcpkg folder above. For me I had to enter cd vcpkg
