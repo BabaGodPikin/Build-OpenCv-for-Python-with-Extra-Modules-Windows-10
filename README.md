@@ -5,7 +5,7 @@
 This is a step by step guide to build OpenCV with Extra Modules for Python (Anaconda) for Windows without errors. Particularly, I will use the freetype module in OpenCV-Contrib.
 
 
-I tried to tbe very detailed so anyone including non-expert programmers can read this and get OpenCV Build running. If you find there are too much details skim through to the particuar area where you had the installation or build error.
+I tried to be very detailed so anyone including non-expert programmers can read this and get the OpenCV + extra modules build running. If you find there are too much details skip familiar parts and head on to particuar areas where you had the installation or build error.
 
 
 For me, the goal was to use OpenCV to print text in different fonts on images – synthetically generate text. OpenCv has a limited font type hence the reason of including freetype2 to read ttf files and render them to OpenCv. The first step to this was even getting OpenCV installed and able to communicate with freetype2.
