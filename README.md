@@ -1,58 +1,73 @@
-# Build-OpenCv-for-Python-with-Extra-Modules-Windows-10-
+# Build OpenCv for Python with Extra Modules Windows 10
+========================================================
+
+
 This is a step by step guide to build OpenCV with Extra Modules for Python (Anaconda) for Windows without errors. Particularly, I will use the freetype module in OpenCV-Contrib.
+
 
 
 
 
 If yours was anything like mine, you spent hours or even a few days trying to figure out how to get OpenCv running with Freetype2 and harfbuzz. I encountered several errors but found easy ways to go around the issues and complete the install. I hope this step by step guide helps you clear your errors.
 
-For me, the goal was to use OpenCV to print text in different fonts on images ñ synthetically generate text. OpenCv has a limited font type hence the reason of including freetype2 to read ttf files and render them to OpenCv.
+
+
+For me, the goal was to use OpenCV to print text in different fonts on images ‚Äì synthetically generate text. OpenCv has a limited font type hence the reason of including freetype2 to read ttf files and render them to OpenCv.
+
+
+
 
 Before I decided to build OpenCv with freetype and Harfbuzz from scratch, I tried installing OpenCv with extra modules using PiP and Conda. For both methods OpenCv installed completely but did not link correctly to freetype and harfbuzz even when I tried PiP installing the OpenCv-Contrib-python as found on https://pypi.org/project/opencv-contrib-python/. I tried several variations including installing freetype first then harfbuzz before PiP installing OpenCv-Contrib-Python. In all, OpenCv installed correctly by did not link to freetype/harfbuzz, I kept getting - ModuleNotFoundError: No module named 'cv2'.
 
-BUILDING OPENCV WITH FREETYPE AND HARFBUZZ ENABLED
-PREREQUISITES: Setup your machine and Installation tools:
-* Windows 10 (x64)
-* OpenCv and OpenCV-Contrib source files ñ I show where to get this in a later section. I installed OpenCv-4.1.0
-* Anaconda3 ñ installed from www.anaconda.org. Download the latest release. During installation,
-o Set as the default python environment
-o Do Not add to path ñ we will do this in a later section when we create a PYTHONPATH environmental variable.
 
-* Python 3.6 ñ installed during anaconda install
-* Cmake 3.15.0 ñ This is needed to configure OpenCV and generate scripts that will be passed to Visual Studio during build and release.
+BUILDING OPENCV WITH FREETYPE AND HARFBUZZ ENABLED
+--------------------------------------------------
+
+PREREQUISITES: Setup your machine and Installation tools:
+--------------
+* Windows 10 (x64)
+* OpenCv and OpenCV-Contrib source files ‚Äì I show where to get this in a later section. I installed OpenCv-4.1.0
+* Anaconda3 ‚Äì installed from www.anaconda.org. Download the latest release. During installation, Set as the default python environment you could also add to path; we will also add it to a PYTHONPATH environmental variable in a later section.
+
+[![Anaconda Image](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/Python%20path%20screen%202.JPG)]
+
+* Python 3.6 ‚Äì installed during anaconda install
+* Cmake 3.15.0 ‚Äì This is needed to configure OpenCV and generate scripts that will be passed to Visual Studio during build and release.
 o Download the windows installer from https://cmake.org/download/ . Just double click the downloaded MSI installer and follow normal windows installation process.
 * Vcpkg - This is needed to install Freeteype2 and harfbuzz
-o Vcpkg does not need to be installed. To get it working, youíll need to clone the vcpkg folder from Microsoft GitHub page (instructions below).  
-o If you donít already have git for windows installed, you can get git here - https://git-scm.com/downloads.
+o Vcpkg does not need to be installed. To get it working, you‚Äôll need to clone the vcpkg folder from Microsoft GitHub page (instructions below)
+
+o If you don‚Äôt already have git for windows installed, you can get git here - https://git-scm.com/downloads.
 o Open your git bash
 o Enter the following commands:
 1. git clone https://github.com/Microsoft/vcpkg.git
 2. The above command copies the needed files to your system. Mine copied to folder located at - C:\Users\<myusername>\vcpkg
 3. Use the cd command of git bash to navigate to the vcpkg folder above. For me I had to enter cd vcpkg
 4. Run the bootstrap-vcpkg.bat file using. Type (including the leading dot): - .\bootstrap-vcpkg.bat
-5. Search for freetype using ñ vcpkg search freetype. This shows you what freetype package is available. 
+5. Search for freetype using ‚Äì vcpkg search freetype. This shows you what freetype package is available. 
 6. Install freetype using vcpkg install boost:x86-windows. Take note of the: x86-windows; for my system since I had x64, my command looked like - vcpkg install boost:x64-windows
-7. Use a similar step from 5 ñ 6 to install harfbuzz.
+7. Use a similar step from 5 ‚Äì 6 to install harfbuzz.
+
 
 These vcpkg processes generate a toolchain file which we will use later in our configuring of OpenCv. This file will have the installation details for freetype2 and harfbuzz which OpenCV extra modules needs to ensure freetype is properly linked to OpenCv.
-Take note of the location of this script file ñ vcpkg.cmake; it will be in the vcpkg install directory. For me it was located at ñ 
+Take note of the location of this script file ‚Äì vcpkg.cmake; it will be in the vcpkg install directory. For me it was located at ‚Äì 
 ~\scripts\buildsystems\vcpkg.cmake
 (~ refers to the path of the vcpkg folder on my system)
 
 
 The above steps are available in more details and other OS types on - https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019 .
-* Visual Studio 2019 ñ this will be used for building and releasing OpenCv. You could also use Visual studio 2017. Be sure to include the C + + build tools. You can download visual studio from - https://visualstudio.microsoft.com/downloads/ . 
+* Visual Studio 2019 ‚Äì this will be used for building and releasing OpenCv. You could also use Visual studio 2017. Be sure to include the C + + build tools. You can download visual studio from - https://visualstudio.microsoft.com/downloads/ . 
 
 
 
 CONFIGURE OPENCV SOURCE FOR BUILD WITH CMAKE:
-In my installation, I noticed that the CMAKE-GUI didnít enable most of the flags I wanted. So, I used both the command line and GUI.
-Using the command line forces configuration for python which I found didnít happen using the GUI alone. I basically run the command on the command line and use the GUI to double check that all the parameters are enabled correctly. Doing this eliminated errors I had previously gotten like ñ freetype found: NO, importerror: OpenCV loader: missing configuration file: [ëconfig.pyí]. check OpenCV installation, cv2 not found, ModuleNotFoundError: No module named ëcv2í, in <module> import cv2 ImportError: DLL load failed: The specified module could not be found.
+In my installation, I noticed that the CMAKE-GUI didn‚Äôt enable most of the flags I wanted. So, I used both the command line and GUI.
+Using the command line forces configuration for python which I found didn‚Äôt happen using the GUI alone. I basically run the command on the command line and use the GUI to double check that all the parameters are enabled correctly. Doing this eliminated errors I had previously gotten like ‚Äì freetype found: NO, importerror: OpenCV loader: missing configuration file: [‚Äòconfig.py‚Äô]. check OpenCV installation, cv2 not found, ModuleNotFoundError: No module named ‚Äòcv2‚Äô, in <module> import cv2 ImportError: DLL load failed: The specified module could not be found.
 
 STEPS:
 In carrying out these steps in CMAKE, if you encounter any errors or make a mistake, go back to the build folder and delete its content so that you have a fresh, clean build.
 1. Download the source files for OpenCv and OpenCV-Contrib. You can find the latest release here:
-a. OpenCv ñ https://github.com/opencv/opencv/releases
+a. OpenCv ‚Äì https://github.com/opencv/opencv/releases
 b. OpenCv-Contrib - https://github.com/opencv/opencv_contrib/releases.
 2. Extract the files to a suitable folder
 3. Create an empty folder called build in the OpenCV root folder i.e. the folder containing the other folders like include, doc, data, apps etc.
@@ -60,7 +75,7 @@ b. OpenCv-Contrib - https://github.com/opencv/opencv_contrib/releases.
 5. Use the cd command to navigate to the root folder; in my case - cd C:\Users\Izuwa\opencv-4.1.0\opencv-4.1.0
 
 
-6. Before running the final script to configure OpenCV, you will need to modify the CMakelists.txt file for freetype. Without this modification, CMAKE didnít recognize freetype and harfbuzz as installed. UnaNancyOwen made this script available in his GitHub repository here - https://gist.github.com/UnaNancyOwen/14c72a3f10a46d41c359ab6ea307a1d2#file-readme-md 
+6. Before running the final script to configure OpenCV, you will need to modify the CMakelists.txt file for freetype. Without this modification, CMAKE didn‚Äôt recognize freetype and harfbuzz as installed. UnaNancyOwen made this script available in his GitHub repository here - https://gist.github.com/UnaNancyOwen/14c72a3f10a46d41c359ab6ea307a1d2#file-readme-md 
 
 Open the CMakeLists.txt on your system at ~/opencv_contrib/modules/freetype/CMakeLists.txt 
 Delete the content, copy the new content from the GitHub link above, paste it in and save the file. 
@@ -82,15 +97,15 @@ cmake -G "Visual Studio 16 2019"
 
 Some important parts of the script:
 * -B takes a parameter of the path of the empty build directory you created.
-* PYTHON_DEFAULT_EXECUTABLE ñ the path to the python.exe. in my case since Anaconda3 is my default python environment, python.exe is in the root folder for Anaconda3
-* PYTHON_LIBRARY ñ in my case I have python 3.6 installed. The python36.lib is located in the libs folder from the root anaconda installation folder.
-* OPENCV_EXTRA_MODULES_PATH ñ is the location of the ìmodulesî folder from the extracted OpenCV-Contrib folder. In my case it was - C:\Users\Izuwa\opencv_contrib-4.1.0\opencv_contrib-4.1.0\modules
-* Finally, -DCMAKE_TOOLCHAIN_FILE needs the path of the vcpkg.cmake script generated after installing freetype2 and harfbuzz. If you didnít take note of this path previously, refer to the section above on using vcpkg to install freetype2 and harfbuzz for details of the location of this file.
+* PYTHON_DEFAULT_EXECUTABLE ‚Äì the path to the python.exe. in my case since Anaconda3 is my default python environment, python.exe is in the root folder for Anaconda3
+* PYTHON_LIBRARY ‚Äì in my case I have python 3.6 installed. The python36.lib is located in the libs folder from the root anaconda installation folder.
+* OPENCV_EXTRA_MODULES_PATH ‚Äì is the location of the ‚Äúmodules‚Äù folder from the extracted OpenCV-Contrib folder. In my case it was - C:\Users\Izuwa\opencv_contrib-4.1.0\opencv_contrib-4.1.0\modules
+* Finally, -DCMAKE_TOOLCHAIN_FILE needs the path of the vcpkg.cmake script generated after installing freetype2 and harfbuzz. If you didn‚Äôt take note of this path previously, refer to the section above on using vcpkg to install freetype2 and harfbuzz for details of the location of this file.
 
 8. After this completes in command line. Open the CMake GUI, browse for the folder of the source code folder (root folder) and build folder and then click File-Reload Cache. Also ensure the grouped and Advanced check box are checked (this makes it easier to read). Then check the following:
 a. Click on Build, make sure BUILD_opencv_python_bindings_generator is checked.
 b. Click on ENABLE, make sure in addition to others selected ENABLE_PYLINT is also selected
-c. Under INSTALL, you can choose to INSTALL_PYTHON_EXAMPLES ñ this will take a longer time to build
+c. Under INSTALL, you can choose to INSTALL_PYTHON_EXAMPLES ‚Äì this will take a longer time to build
 d. CLICK on OPENCV, make sure:
 i. OPENCV_EXTRA_MODULES_PATH has the right path if not, click the entry field and input the right path
 ii. OPENCV_PYTHON3_VERSION is checked
@@ -118,8 +133,8 @@ BUILD AND RELEASE OPENCV WITH VISUAL STUDIO:
 This is the final part of the installation. 
 Steps:
 1. Open the build folder in the OpenCv directory
-2. You should find a Visual Studio .sln file ñ (OpenCV.Sln) ñ double click it to open with Visual Studio 
-3. On the right pane, right click INSTALL and click build. Ensure that the solution configuration is Debug and the solution platform corresponds to that of your system (in my case x64). This build will take a while ñ let it run.
+2. You should find a Visual Studio .sln file ‚Äì (OpenCV.Sln) ‚Äì double click it to open with Visual Studio 
+3. On the right pane, right click INSTALL and click build. Ensure that the solution configuration is Debug and the solution platform corresponds to that of your system (in my case x64). This build will take a while ‚Äì let it run.
 4. Finally, change the solution configuration to release and right click INSTALL and click build.
 
 
@@ -138,7 +153,7 @@ Cv2.__version__
 If both run successfully, you have completed the installation of OpenCV with freetype2
 
 Some common Errors encountered:
-Some of the common errors encountered during installation are listed below. They are caused by either improper installation, the python loader for OpenCV is not seen by the python environment, or CMAKE didnít configure the build to include python environment.
+Some of the common errors encountered during installation are listed below. They are caused by either improper installation, the python loader for OpenCV is not seen by the python environment, or CMAKE didn‚Äôt configure the build to include python environment.
 
 AttributeError: module 'cv2' has no attribute 'freetype'
 importerror: opencv loader: missing configuration file: ['config.py']. check opencv installation.
