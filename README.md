@@ -20,8 +20,8 @@ For me, the goal was to use OpenCV to print text in different fonts on images �
 Before I decided to build OpenCv with freetype and Harfbuzz from scratch, I tried installing OpenCv with extra modules using PiP and Conda. For both methods OpenCv installed completely but did not link correctly to freetype and harfbuzz even when I tried PiP installing the OpenCv-Contrib-python as found on https://pypi.org/project/opencv-contrib-python/. I tried several variations including installing freetype first then harfbuzz before PiP installing OpenCv-Contrib-Python. In all, OpenCv installed correctly by did not link to freetype/harfbuzz, I kept getting - ModuleNotFoundError: No module named 'cv2'.
 
 
-BUILDING OPENCV WITH FREETYPE AND HARFBUZZ ENABLED
---------------------------------------------------
+## BUILDING OPENCV WITH FREETYPE AND HARFBUZZ ENABLED ##
+
 
 ### PREREQUISITES: Setup your machine and Installation tools: ###
 
@@ -33,38 +33,46 @@ BUILDING OPENCV WITH FREETYPE AND HARFBUZZ ENABLED
 
 * Python 3.6 – installed during anaconda install
 * Cmake 3.15.0 – This is needed to configure OpenCV and generate scripts that will be passed to Visual Studio during build and release.
-       * Download the windows installer from https://cmake.org/download/ . Just double click the downloaded MSI installer and follow normal windows installation process.
+            
+            *Download the windows installer from https://cmake.org/download/ . Just double click the downloaded MSI installer and follow normal windows installation process.
 * Vcpkg - This is needed to install Freeteype2 and harfbuzz
-       * Vcpkg does not need to be installed. To get it working, you’ll need to clone the vcpkg folder from Microsoft GitHub page (instructions below)
-       * If you don’t already have git for windows installed, you can get git here - https://git-scm.com/downloads.
-       * Open your git bash
-       * Enter the following commands:
-              1. git clone https://github.com/Microsoft/vcpkg.git
-              2. The above command copies the needed files to your system. Mine copied to folder located at - C:\Users\<myusername>\vcpkg
-              3. Use the cd command of git bash to navigate to the vcpkg folder above. For me I had to enter cd vcpkg
-              4. Run the bootstrap-vcpkg.bat file using. Type (including the leading dot): - .\bootstrap-vcpkg.bat
-              5. Search for freetype using – vcpkg search freetype. This shows you what freetype package is available. 
-              6. Install freetype using vcpkg install boost:x86-windows. Take note of the: x86-windows; for my system since I had x64, my command looked like - vcpkg install boost:x64-windows
-              7. Use a similar step from 5 – 6 to install harfbuzz.
-
+      
+      *Vcpkg does not need to be installed. To get it working, you’ll need to clone the vcpkg folder from Microsoft GitHub page (instructions below)
+      *If you don’t already have git for windows installed, you can get git here - https://git-scm.com/downloads.
+      *Open your git bash
+      *Enter the following commands:
+            1. git clone https://github.com/Microsoft/vcpkg.git
+            2. The above command copies the needed files to your system. Mine copied to folder located at - C:\Users\<myusername>\vcpkg
+            3. Use the cd command of git bash to navigate to the vcpkg folder above. For me I had to enter cd vcpkg
+            4. Run the bootstrap-vcpkg.bat file using. Type (including the leading dot): - .\bootstrap-vcpkg.bat
+            5. Search for freetype using – vcpkg search freetype. This shows you what freetype package is available. 
+            6. Install freetype using vcpkg install boost:x86-windows. Take note of the: x86-windows; for my system since I had x64, my command looked like - vcpkg install boost:x64-windows
+            7. Use a similar step from 5 – 6 to install harfbuzz.
 
 These vcpkg processes generate a toolchain file which we will use later in our configuring of OpenCv. This file will have the installation details for freetype2 and harfbuzz which OpenCV extra modules needs to ensure freetype is properly linked to OpenCv.
+
+
 Take note of the location of this script file – vcpkg.cmake; it will be in the vcpkg install directory. For me it was located at – 
 ~\scripts\buildsystems\vcpkg.cmake
 (~ refers to the path of the vcpkg folder on my system)
 
+[![vcpkg Location](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/vcpkg%20location%20capture.JPG)]
 
-The above steps are available in more details and other OS types on - https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019 .
-* Visual Studio 2019 – this will be used for building and releasing OpenCv. You could also use Visual studio 2017. Be sure to include the C + + build tools. You can download visual studio from - https://visualstudio.microsoft.com/downloads/ . 
+      *The above steps are available in more details and other OS types on - https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019 .
+      *Visual Studio 2019 – this will be used for building and releasing OpenCv. You could also use Visual studio 2017. Be sure to include the C + + build tools. You can download visual studio from - https://visualstudio.microsoft.com/downloads/ . 
 
 
+[![Visual Studio Download Options](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/Visual%20Studio%20Screen%20Shot.JPG)]
 
-CONFIGURE OPENCV SOURCE FOR BUILD WITH CMAKE:
+
+## CONFIGURE OPENCV SOURCE FOR BUILD WITH CMAKE: ##
+
 In my installation, I noticed that the CMAKE-GUI didn’t enable most of the flags I wanted. So, I used both the command line and GUI.
 Using the command line forces configuration for python which I found didn’t happen using the GUI alone. I basically run the command on the command line and use the GUI to double check that all the parameters are enabled correctly. Doing this eliminated errors I had previously gotten like – freetype found: NO, importerror: OpenCV loader: missing configuration file: [‘config.py’]. check OpenCV installation, cv2 not found, ModuleNotFoundError: No module named ‘cv2’, in <module> import cv2 ImportError: DLL load failed: The specified module could not be found.
 
-STEPS:
+### STEPS: ###
 In carrying out these steps in CMAKE, if you encounter any errors or make a mistake, go back to the build folder and delete its content so that you have a fresh, clean build.
+
 1. Download the source files for OpenCv and OpenCV-Contrib. You can find the latest release here:
 a. OpenCv – https://github.com/opencv/opencv/releases
 b. OpenCv-Contrib - https://github.com/opencv/opencv_contrib/releases.
