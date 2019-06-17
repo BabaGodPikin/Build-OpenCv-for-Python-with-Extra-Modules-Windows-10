@@ -87,10 +87,10 @@ b. OpenCv-Contrib - https://github.com/opencv/opencv_contrib/releases.
 Open the CMakeLists.txt on your system at ~/opencv_contrib/modules/freetype/CMakeLists.txt 
 Delete the content, copy the new content from the GitHub link above, paste it in and save the file. 
 
-7. Run the following CMAKE Command (I put them in individual lines, so you can read each of the command; ideally you should run it all together like the screen shot below). If there are spaces in your file path, enclose the entire file path in parenthesis.
+7. Run the following CMAKE Command (I put them in individual lines, so you can read each of the command; ideally you should run it all together with each separated by a space). If there are spaces in your file path, enclose the entire file path in parenthesis. Note that the paths below correspond to the path on my system.
 
 cmake -G "Visual Studio 16 2019" 
-       -B C:\Users\Izuwa\opencv-4.1.0\opencv-4.1.0\build 
+       -B C:\Users\zuw\opencv-4.1.0\opencv-4.1.0\build 
        -D BUILD_NEW_PYTHON_SUPPORT=ON 
        -D BUILD_PYTHON_SUPPORT=ON 
        -D BUILD_opencv_python3=yes 
@@ -110,42 +110,51 @@ Some important parts of the script:
 * Finally, -DCMAKE_TOOLCHAIN_FILE needs the path of the vcpkg.cmake script generated after installing freetype2 and harfbuzz. If you didn’t take note of this path previously, refer to the section above on using vcpkg to install freetype2 and harfbuzz for details of the location of this file.
 
 8. After this completes in command line. Open the CMake GUI, browse for the folder of the source code folder (root folder) and build folder and then click File-Reload Cache. Also ensure the grouped and Advanced check box are checked (this makes it easier to read). Then check the following:
-a. Click on Build, make sure BUILD_opencv_python_bindings_generator is checked.
-b. Click on ENABLE, make sure in addition to others selected ENABLE_PYLINT is also selected
-c. Under INSTALL, you can choose to INSTALL_PYTHON_EXAMPLES – this will take a longer time to build
-d. CLICK on OPENCV, make sure:
-i. OPENCV_EXTRA_MODULES_PATH has the right path if not, click the entry field and input the right path
-ii. OPENCV_PYTHON3_VERSION is checked
-iii. OPENCV_FORCE_PYTHON_LIBS is checked
 
-e. Click on PYTHON3 and make sure:
-i. PYTHON3_EXECUTABLE has the right path
-ii. PYTHON3_INCLUDE_DIR has the right path
-iii. PYTHON3_LIBRARY has the right lib file link
-iv. PYTHON3_NUMPY_INCLUDE_DIRS has the right link (NumPy is required; if you have not already installed it, you can open anaconda prompt and type - conda install -c conda-forge numpy)
-v. PYTHON3_PACKAGES_PATH has the right link
+            a. Click on Build, make sure BUILD_opencv_python_bindings_generator is checked.
+            b. Click on ENABLE, make sure in addition to others selected ENABLE_PYLINT is also selected
+            c. Under INSTALL, you can choose to INSTALL_PYTHON_EXAMPLES – this will take a longer time to build
+            d. CLICK on OPENCV, make sure:
+            i. OPENCV_EXTRA_MODULES_PATH has the right path if not, click the entry field and input the right path
+            ii. OPENCV_PYTHON3_VERSION is checked
+            iii. OPENCV_FORCE_PYTHON_LIBS is checked
 
-f. Finally click Configure (once) and then generate
+[![opencv options](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/cmake%20opencv%20screen.JPG)]
+
+            e. Click on PYTHON3 and make sure:
+            i. PYTHON3_EXECUTABLE has the right path
+            ii. PYTHON3_INCLUDE_DIR has the right path
+            iii. PYTHON3_LIBRARY has the right lib file link
+            iv. PYTHON3_NUMPY_INCLUDE_DIRS has the right link (NumPy is required; if you have not already installed it, you can open anaconda prompt and type - conda install -c conda-forge numpy)
+            v. PYTHON3_PACKAGES_PATH has the right link
+
+[![python options](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/cmake%20python%20screen.JPG)]
+
+            f. Finally click Configure (once) and then generate
+
 At this point, you are ready to build the project and release it with Visual Studio.
 9. NOTE: As part of the output written out as CMAKE configures the build, CMAKE produces the following - OpenCV Python: during development append to PYTHONPATH: C:/Users/Izuwa/opencv-4.1.0/opencv-4.1.0/build/python_loader
 
 You will need to create an environment Variable called PYTHONPATH and add this folder path specified by CMAKE. In my installation, I added the default python path (C:\Users\<localName>\Anaconda3\ and C:\Users\<localName>\Anaconda3\Scripts. I made the OpenCV Python path first on the list like the screen shot below:
 
 
+[![python options](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/Python%20path%20screen.JPG)]
+
+[![python options](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/Python%20path%20screen%202.JPG)]
 
 
 
-BUILD AND RELEASE OPENCV WITH VISUAL STUDIO:
+## BUILD AND RELEASE OPENCV WITH VISUAL STUDIO: ##
 
 This is the final part of the installation. 
-Steps:
+### Steps: ###
 1. Open the build folder in the OpenCv directory
 2. You should find a Visual Studio .sln file – (OpenCV.Sln) – double click it to open with Visual Studio 
 3. On the right pane, right click INSTALL and click build. Ensure that the solution configuration is Debug and the solution platform corresponds to that of your system (in my case x64). This build will take a while – let it run.
 4. Finally, change the solution configuration to release and right click INSTALL and click build.
 
 
-TESTING THAT OPENCV IS INSTALLED:
+## TESTING THAT OPENCV IS INSTALLED: ##
 At this point, you are ready to test that OpenCV is running on anaconda. 
 Remember to complete this step: 
 NOTE: As part of the output written out as CMAKE configures the build, CMAKE produces the following - OpenCV Python: during development append to PYTHONPATH: C:/Users/Izuwa/opencv-4.1.0/opencv-4.1.0/build/python_loader
@@ -159,7 +168,9 @@ Cv2.__version__
 
 If both run successfully, you have completed the installation of OpenCV with freetype2
 
-Some common Errors encountered:
+
+## Some common Errors encountered: ##
+
 Some of the common errors encountered during installation are listed below. They are caused by either improper installation, the python loader for OpenCV is not seen by the python environment, or CMAKE didn’t configure the build to include python environment.
 
 AttributeError: module 'cv2' has no attribute 'freetype'
@@ -169,7 +180,7 @@ modulenotfounderror no module named 'cv2' windows
 importerror: dll load failed: the specified module could not be found.
 
 
-References:
+### Some Useful References: ###
 https://vcpkg.readthedocs.io/en/latest/examples/installing-and-using-packages/
 https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019
 https://stackoverflow.com/questions/38051220/when-build-opencv-could-not-find-the-file-cv2-so/39651947
