@@ -89,17 +89,17 @@ Delete the content, copy the new content from the GitHub link above, paste it in
 
 7. Run the following CMAKE Command (I put them in individual lines, so you can read each of the command; ideally you should run it all together with each separated by a space). If there are spaces in your file path, enclose the entire file path in parenthesis. Note that the paths below correspond to the path on my system.
 
-cmake -G "Visual Studio 16 2019" 
-       -B C:\Users\zuw\opencv-4.1.0\opencv-4.1.0\build 
-       -D BUILD_NEW_PYTHON_SUPPORT=ON 
-       -D BUILD_PYTHON_SUPPORT=ON 
-       -D BUILD_opencv_python3=yes 
-       -D PYTHON_DEFAULT_EXECUTABLE=C:\Users\Izuwa\Anaconda3\python.exe 
-       -D OPENCV_SKIP_PYTHON_LOADER=ON 
-       -D PYTHON_LIBRARY=C:\Users\Izuwa\Anaconda3\libs\python36.lib 
-       -D OPENCV_EXTRA_MODULES_PATH=C:\Users\Izuwa\opencv_contrib-4.1.0\opencv_contrib-4.1.0\modules 
-       -D OPEN_CV_FORCE_PYTHON_LIBS=yes 
-       -DCMAKE_TOOLCHAIN_FILE=C:\Users\Izuwa\vcpkg\scripts\buildsystems\vcpkg.cmake
+            *cmake -G "Visual Studio 16 2019" 
+                        -B C:\Users\zuw\opencv-4.1.0\opencv-4.1.0\build 
+                        -D BUILD_NEW_PYTHON_SUPPORT=ON 
+                        -D BUILD_PYTHON_SUPPORT=ON 
+                        -D BUILD_opencv_python3=yes 
+                        -D PYTHON_DEFAULT_EXECUTABLE=C:\Users\Izuwa\Anaconda3\python.exe 
+                        -D OPENCV_SKIP_PYTHON_LOADER=ON 
+                        -D PYTHON_LIBRARY=C:\Users\Izuwa\Anaconda3\libs\python36.lib 
+                        -D OPENCV_EXTRA_MODULES_PATH=C:\Users\Izuwa\opencv_contrib-4.1.0\opencv_contrib-4.1.0\modules 
+                        -D OPEN_CV_FORCE_PYTHON_LIBS=yes 
+                        -DCMAKE_TOOLCHAIN_FILE=C:\Users\Izuwa\vcpkg\scripts\buildsystems\vcpkg.cmake
 
 
 Some important parts of the script:
