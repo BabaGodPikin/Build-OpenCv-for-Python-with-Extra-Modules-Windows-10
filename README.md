@@ -5,16 +5,10 @@
 This is a step by step guide to build OpenCV with Extra Modules for Python (Anaconda) for Windows without errors. Particularly, I will use the freetype module in OpenCV-Contrib.
 
 
+I tried to tbe very detailed so anyone including non-expert programmers can read this and get OpenCV Build running. If you find there are too much details skim through to the particuar area where you had the installation or build error.
 
 
-
-If yours was anything like mine, you spent hours or even a few days trying to figure out how to get OpenCv running with Freetype2 and harfbuzz. I encountered several errors but found easy ways to go around the issues and complete the install. I hope this step by step guide helps you clear your errors.
-
-
-
-For me, the goal was to use OpenCV to print text in different fonts on images – synthetically generate text. OpenCv has a limited font type hence the reason of including freetype2 to read ttf files and render them to OpenCv.
-
-
+For me, the goal was to use OpenCV to print text in different fonts on images – synthetically generate text. OpenCv has a limited font type hence the reason of including freetype2 to read ttf files and render them to OpenCv. The first step to this was even getting OpenCV installed and able to communicate with freetype2.
 
 
 Before I decided to build OpenCv with freetype and Harfbuzz from scratch, I tried installing OpenCv with extra modules using PiP and Conda. For both methods OpenCv installed completely but did not link correctly to freetype and harfbuzz even when I tried PiP installing the OpenCv-Contrib-python as found on https://pypi.org/project/opencv-contrib-python/. I tried several variations including installing freetype first then harfbuzz before PiP installing OpenCv-Contrib-Python. In all, OpenCv installed correctly by did not link to freetype/harfbuzz, I kept getting - ModuleNotFoundError: No module named 'cv2'.
@@ -115,18 +109,18 @@ Some important parts of the script:
             b. Click on ENABLE, make sure in addition to others selected ENABLE_PYLINT is also selected
             c. Under INSTALL, you can choose to INSTALL_PYTHON_EXAMPLES – this will take a longer time to build
             d. CLICK on OPENCV, make sure:
-            i. OPENCV_EXTRA_MODULES_PATH has the right path if not, click the entry field and input the right path
-            ii. OPENCV_PYTHON3_VERSION is checked
-            iii. OPENCV_FORCE_PYTHON_LIBS is checked
+                        i. OPENCV_EXTRA_MODULES_PATH has the right path if not, click the entry field and input the right path
+                        ii. OPENCV_PYTHON3_VERSION is checked
+                        iii. OPENCV_FORCE_PYTHON_LIBS is checked
 
 [![opencv options](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/cmake%20opencv%20screen.JPG)]
 
             e. Click on PYTHON3 and make sure:
-            i. PYTHON3_EXECUTABLE has the right path
-            ii. PYTHON3_INCLUDE_DIR has the right path
-            iii. PYTHON3_LIBRARY has the right lib file link
-            iv. PYTHON3_NUMPY_INCLUDE_DIRS has the right link (NumPy is required; if you have not already installed it, you can open anaconda prompt and type - conda install -c conda-forge numpy)
-            v. PYTHON3_PACKAGES_PATH has the right link
+                        i. PYTHON3_EXECUTABLE has the right path
+                        ii. PYTHON3_INCLUDE_DIR has the right path
+                        iii. PYTHON3_LIBRARY has the right lib file link
+                        iv. PYTHON3_NUMPY_INCLUDE_DIRS has the right link (NumPy is required; if you have not already installed it, you can open anaconda prompt and type - conda install -c conda-forge numpy)
+                        v. PYTHON3_PACKAGES_PATH has the right link
 
 [![python options](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/cmake%20python%20screen.JPG)]
 
