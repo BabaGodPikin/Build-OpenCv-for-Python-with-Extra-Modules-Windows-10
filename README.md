@@ -89,7 +89,7 @@ Delete the content, copy the new content from the GitHub link above, paste it in
 
 7. Run the following CMAKE Command (I put them in individual lines, so you can read each of the command; ideally you should run it all together with each separated by a space). If there are spaces in your file path, enclose the entire file path in parenthesis. Note that the paths below correspond to the path on my system.
 
-            *cmake -G "Visual Studio 16 2019" 
+            cmake -G "Visual Studio 16 2019" 
                         -B C:\Users\zuw\opencv-4.1.0\opencv-4.1.0\build 
                         -D BUILD_NEW_PYTHON_SUPPORT=ON 
                         -D BUILD_PYTHON_SUPPORT=ON 
