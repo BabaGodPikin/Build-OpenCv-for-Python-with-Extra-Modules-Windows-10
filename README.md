@@ -29,24 +29,24 @@ PREREQUISITES: Setup your machine and Installation tools:
 * OpenCv and OpenCV-Contrib source files – I show where to get this in a later section. I installed OpenCv-4.1.0
 * Anaconda3 – installed from www.anaconda.org. Download the latest release. During installation, Set as the default python environment you could also add to path; we will also add it to a PYTHONPATH environmental variable in a later section.
 
-![Alt text](/images/Visual-Studio-1.JPG?raw=true "Anaconda img")
+[![Anaconda Image](images/Python path screen 2.JPG?raw=true "Anaconda img")]
 
 * Python 3.6 – installed during anaconda install
 * Cmake 3.15.0 – This is needed to configure OpenCV and generate scripts that will be passed to Visual Studio during build and release.
 o Download the windows installer from https://cmake.org/download/ . Just double click the downloaded MSI installer and follow normal windows installation process.
 * Vcpkg - This is needed to install Freeteype2 and harfbuzz
-o Vcpkg does not need to be installed. To get it working, you’ll need to clone the vcpkg folder from Microsoft GitHub page (instructions below)
+**o Vcpkg does not need to be installed. To get it working, you’ll need to clone the vcpkg folder from Microsoft GitHub page (instructions below)
 
-o If you don’t already have git for windows installed, you can get git here - https://git-scm.com/downloads.
-o Open your git bash
-o Enter the following commands:
-1. git clone https://github.com/Microsoft/vcpkg.git
-2. The above command copies the needed files to your system. Mine copied to folder located at - C:\Users\<myusername>\vcpkg
-3. Use the cd command of git bash to navigate to the vcpkg folder above. For me I had to enter cd vcpkg
-4. Run the bootstrap-vcpkg.bat file using. Type (including the leading dot): - .\bootstrap-vcpkg.bat
-5. Search for freetype using – vcpkg search freetype. This shows you what freetype package is available. 
-6. Install freetype using vcpkg install boost:x86-windows. Take note of the: x86-windows; for my system since I had x64, my command looked like - vcpkg install boost:x64-windows
-7. Use a similar step from 5 – 6 to install harfbuzz.
+**o If you don’t already have git for windows installed, you can get git here - https://git-scm.com/downloads.
+**o Open your git bash
+**o Enter the following commands:
+***1. git clone https://github.com/Microsoft/vcpkg.git
+***2. The above command copies the needed files to your system. Mine copied to folder located at - C:\Users\<myusername>\vcpkg
+***3. Use the cd command of git bash to navigate to the vcpkg folder above. For me I had to enter cd vcpkg
+***4. Run the bootstrap-vcpkg.bat file using. Type (including the leading dot): - .\bootstrap-vcpkg.bat
+***5. Search for freetype using – vcpkg search freetype. This shows you what freetype package is available. 
+***6. Install freetype using vcpkg install boost:x86-windows. Take note of the: x86-windows; for my system since I had x64, my command looked like - vcpkg install boost:x64-windows
+***7. Use a similar step from 5 – 6 to install harfbuzz.
 
 
 These vcpkg processes generate a toolchain file which we will use later in our configuring of OpenCv. This file will have the installation details for freetype2 and harfbuzz which OpenCV extra modules needs to ensure freetype is properly linked to OpenCv.
