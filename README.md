@@ -1,5 +1,5 @@
-# Build-OpenCv-for-Python-with-Extra-Modules-Windows-10-
----------------------------------------------------------
+# Build OpenCv for Python with Extra Modules Windows 10
+========================================================
 
 
 This is a step by step guide to build OpenCV with Extra Modules for Python (Anaconda) for Windows without errors. Particularly, I will use the freetype module in OpenCV-Contrib.
@@ -7,25 +7,36 @@ This is a step by step guide to build OpenCV with Extra Modules for Python (Anac
 
 
 
+
 If yours was anything like mine, you spent hours or even a few days trying to figure out how to get OpenCv running with Freetype2 and harfbuzz. I encountered several errors but found easy ways to go around the issues and complete the install. I hope this step by step guide helps you clear your errors.
+
+
 
 For me, the goal was to use OpenCV to print text in different fonts on images – synthetically generate text. OpenCv has a limited font type hence the reason of including freetype2 to read ttf files and render them to OpenCv.
 
+
+
+
 Before I decided to build OpenCv with freetype and Harfbuzz from scratch, I tried installing OpenCv with extra modules using PiP and Conda. For both methods OpenCv installed completely but did not link correctly to freetype and harfbuzz even when I tried PiP installing the OpenCv-Contrib-python as found on https://pypi.org/project/opencv-contrib-python/. I tried several variations including installing freetype first then harfbuzz before PiP installing OpenCv-Contrib-Python. In all, OpenCv installed correctly by did not link to freetype/harfbuzz, I kept getting - ModuleNotFoundError: No module named 'cv2'.
 
+
 BUILDING OPENCV WITH FREETYPE AND HARFBUZZ ENABLED
+--------------------------------------------------
+
 PREREQUISITES: Setup your machine and Installation tools:
+--------------
 * Windows 10 (x64)
 * OpenCv and OpenCV-Contrib source files – I show where to get this in a later section. I installed OpenCv-4.1.0
-* Anaconda3 – installed from www.anaconda.org. Download the latest release. During installation,
-o Set as the default python environment
-o Do Not add to path – we will do this in a later section when we create a PYTHONPATH environmental variable.
+* Anaconda3 – installed from www.anaconda.org. Download the latest release. During installation, Set as the default python environment you could also add to path; we will also add it to a PYTHONPATH environmental variable in a later section.
+
+              ![alt text](https://github.com/BabaGodPikin/Build-OpenCv-for-Python-with-Extra-Modules-Windows-10/blob/master/images/Python%20path%20screen.JPG)
 
 * Python 3.6 – installed during anaconda install
 * Cmake 3.15.0 – This is needed to configure OpenCV and generate scripts that will be passed to Visual Studio during build and release.
 o Download the windows installer from https://cmake.org/download/ . Just double click the downloaded MSI installer and follow normal windows installation process.
 * Vcpkg - This is needed to install Freeteype2 and harfbuzz
-o Vcpkg does not need to be installed. To get it working, you’ll need to clone the vcpkg folder from Microsoft GitHub page (instructions below).  
+o Vcpkg does not need to be installed. To get it working, you’ll need to clone the vcpkg folder from Microsoft GitHub page (instructions below)
+
 o If you don’t already have git for windows installed, you can get git here - https://git-scm.com/downloads.
 o Open your git bash
 o Enter the following commands:
@@ -36,6 +47,7 @@ o Enter the following commands:
 5. Search for freetype using – vcpkg search freetype. This shows you what freetype package is available. 
 6. Install freetype using vcpkg install boost:x86-windows. Take note of the: x86-windows; for my system since I had x64, my command looked like - vcpkg install boost:x64-windows
 7. Use a similar step from 5 – 6 to install harfbuzz.
+
 
 These vcpkg processes generate a toolchain file which we will use later in our configuring of OpenCv. This file will have the installation details for freetype2 and harfbuzz which OpenCV extra modules needs to ensure freetype is properly linked to OpenCv.
 Take note of the location of this script file – vcpkg.cmake; it will be in the vcpkg install directory. For me it was located at – 
