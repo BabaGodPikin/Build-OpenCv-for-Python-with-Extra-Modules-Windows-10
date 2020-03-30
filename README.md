@@ -40,7 +40,7 @@ Before I decided to build OpenCv with freetype and Harfbuzz from scratch, I trie
             3. Use the cd command of git bash to navigate to the vcpkg folder above. For me I had to enter cd vcpkg
             4. Run the bootstrap-vcpkg.bat file using. Type (including the leading dot): - .\bootstrap-vcpkg.bat
             5. Search for freetype using – vcpkg search freetype. This shows you what freetype package is available. 
-            6. Install freetype using vcpkg install boost:x86-windows. Take note of the: x86-windows; for my system since I had x64, my command looked like - vcpkg install boost:x64-windows
+            6. Install freetype using vcpkg install freetype:x86-windows. Take note of the: x86-windows; for my system since I had x64, my command looked like - vcpkg install freetype:x64-windows
             7. Use a similar step from 5 – 6 to install harfbuzz.
 
 These vcpkg processes generate a toolchain file which we will use later in our configuring of OpenCv. This file will have the installation details for freetype2 and harfbuzz which OpenCV extra modules needs to ensure freetype is properly linked to OpenCv.
